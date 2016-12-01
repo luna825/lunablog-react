@@ -5,8 +5,7 @@ var webpack = require('webpack')
 var app = express();
 var isDev = process.env.NODE_ENV === 'development'
 
-var defaultPort = isDev ? 3000:8300
-var port = process.env.PORT || defaultPort
+var port = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, '../public')))
 
