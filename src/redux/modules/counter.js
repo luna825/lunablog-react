@@ -1,9 +1,15 @@
+import {Map, fromJS} from 'immutable';
+
 const INCREMENT = 'app/count/INCREMENT'
 
-export default function reducer(state=0,action){
+const INITIAL_STATE = fromJS({
+  count: 0
+})
+
+export default function reducer(state=INITIAL_STATE,action){
   switch(action.type){
     case INCREMENT:
-      return state + 1;
+      return state.update('count', (v)=>v + 1)
     default:
       return state;
   }
@@ -17,7 +23,7 @@ export function increment(){
 
 export function incrementIfOdd(){
   return (getstate, dispatch)=>{
-    const { counter } = getstate()
+    const counter = getstate().getIn(['counter', 'count'])
 
     if( counter % 2 === 0){
       return
