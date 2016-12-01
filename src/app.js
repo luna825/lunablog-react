@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class Hello extends React.Component {
-  render(){
-    return(
-      <h1>999</h1>
-    )
-  }
-}
+import routes from './routes'
+import {Router, browserHistory} from 'react-router'
 
-ReactDOM.render(<Hello />, document.getElementById('app'))
+
+ReactDOM.render(
+  <Router history={browserHistory}>
+    {routes}
+  </Router>
+  ,document.getElementById('app'))
