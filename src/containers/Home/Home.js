@@ -1,9 +1,30 @@
 import React,{Component, PropTypes} from 'react'
 
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import * as CounterActions from '../../redux/modules/counter'
+
+@connect(
+  state => ({counter: state.counter}),
+  dispatch => bindActionCreators(CounterActions, dispatch)
+)
 export default class Home extends Component {
+
+  static propTypes = {
+    counter:PropTypes.number.isRequired,
+    increment:PropTypes.func.isRequired,
+    incrementIfOdd:PropTypes.func.isRequired
+  };
+
   render(){
+    const {counter, increment} = this.props;
     return(
-      <div>HomePage</div>
+      <div>
+        <h2>{counter}</h2>
+        <button onClick={increment}>
+           You have clicked me {counter} time{counter === 1 ? '' : 's'}.
+        </button>
+      </div>
     )
   }
 }
