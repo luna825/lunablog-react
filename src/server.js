@@ -2,12 +2,38 @@ var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
 
-var app = express();
-var isDev = process.env.NODE_ENV === 'development'
+var httpProxy = require('http-proxy')
+var appCfg = require('../cfg/appCfg')
 
-var port = process.env.PORT || 3000
+var app = express();
+
+var targetUrl = "http://" + appCfg.APIHOST + ":" + appCfg.APIPORT
+var proxy = httpProxy.createProxyServer({
+  target: targetUrl,
+  ws: true
+});
+
+
+var isDev = process.env.NODE_ENV === 'development'
+var port = process.env.PORT || appCfg.PORT
 
 app.use(express.static(path.join(__dirname, '../public')))
+app.use('/api', function(req, res){
+  proxy.web(req, res, {target: targetUrl})
+})
+
+proxy.on('error', (error, req, res) => {
+  var json;
+  if (error.code !== 'ECONNRESET') {
+    console.error('proxy error', error);
+  }
+  if (!res.headersSent) {
+    res.writeHead(500, {'content-type': 'application/json'});
+  }
+
+  json = {error: 'proxy_error', reason: error.message};
+  res.end(JSON.stringify(json));
+});
 
 if(isDev){
   var config = require('../cfg/webpack.dev.js')
