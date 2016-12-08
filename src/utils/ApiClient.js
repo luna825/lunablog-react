@@ -14,8 +14,12 @@ export default class ApiClient {
 
   constructor(req){
     methods.forEach((method)=>{
-      this[method] = (path, {params, data}) => new Promise((resolve, reject)=>{
+      this[method] = (path, {params, data, token} = {}) => new Promise((resolve, reject)=>{
         const request = superagent[method](formatUrl(path))
+
+        if(token){
+          request.set('Authorization', 'Bearer ' + token)
+        }
 
         if(params){
           request.query(params)

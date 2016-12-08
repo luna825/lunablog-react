@@ -7,7 +7,10 @@ import {Router, browserHistory} from 'react-router'
 import {Provider} from 'react-redux'
 import createWithMiddleware from './redux/create'
 
-const store = createWithMiddleware()
+import ApiClient from 'utils/ApiClient'
+
+const client = new ApiClient()
+const store = createWithMiddleware(client)
 
 window.store = store
 
