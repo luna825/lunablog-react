@@ -1,0 +1,94 @@
+@import '../../theme/varibles.scss';
+
+/* 重置默认样式 start */
+* {
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+ul,ol,dl {
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+a { text-decoration: none ;}
+a:link, a:visited{ color: inherit; text-decoration:none;}
+a:hover {text-decoration: none;}
+
+body {
+  font: 16px 'Trebuche MS', Verdana, Helvetica, Arial, sans-serif;
+  color:#444;
+  background-color: white;
+}
+/* 重置默认样式 end */
+
+
+
+/* nav的结构 start */
+.navbar {
+  position: fixed;
+  left:0;
+  top: 0;
+  width: $navbarSize;
+  height: 100%;
+  @media (max-width: $screen-sm){
+    width: $navbarSize;
+    height: $navbarSize;
+  }
+
+  .navbar-menu {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+  }
+
+  .navbar-expended {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  @at-root .navbar-item {
+    display: flex;
+    width:100%;
+    height: $navbarSize;
+    align-items: center;
+    justify-content: center;
+
+  }
+  
+}
+/* nav的结构 end */
+
+/* nav的样式 start */
+.navbar-skin {
+  color: #999;
+  background-color: $navBgColor;
+  .logo {
+    font-size: 18px;
+  }
+  .navbar-menu {
+    .active {
+      background-color: $navActiveColor;
+      color: white;
+    }
+    .navbar-item {
+      &:hover {
+        background-color:$navHoverBgColor;
+        color: white;
+      }
+    }
+  }
+
+  .navbar-expended {
+    .navbar-item {
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+/* nav的样式 start */

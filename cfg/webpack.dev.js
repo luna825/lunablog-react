@@ -13,7 +13,8 @@ var plugins = [
 
 
 var config = {
-  entry:[ 
+  entry:[
+    "font-awesome-webpack!./src/theme/font-awesome.config.js", 
     'bootstrap-loader',
     path.resolve(projectRootPath, 'src', 'app.js') 
   ],

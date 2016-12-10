@@ -8,8 +8,8 @@ import * as authActions from 'redux/modules/auth'
 
 @connect(
   state => ({
-    counter: state.getIn(['counter','count']),
-    auth: state.get('auth')
+    counter: state.counter.get('count'),
+    auth: state.auth
   }),
   dispatch => bindActionCreators({
     ...CounterActions,
@@ -24,13 +24,18 @@ export default class Home extends Component {
     incrementIfOdd:PropTypes.func.isRequired
   };
 
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   render(){
     const {counter, increment, incrementIfOdd, 
             login, loadUser, auth, loadUserInfo} = this.props;
     return(
       <div>
         <h2>{counter}</h2>
-        <button onClick={increment}>
+
+        <button className="btn btn-success" onClick={increment}>
            You have clicked me {counter} time{counter === 1 ? '' : 's'}.
         </button>
         <button onClick={incrementIfOdd} > incrementIfOdd </button>

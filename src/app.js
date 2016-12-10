@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import routes from './routes'
 import {Router, browserHistory} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
 
 import {Provider} from 'react-redux'
 import createWithMiddleware from './redux/create'
@@ -11,12 +12,12 @@ import ApiClient from 'utils/ApiClient'
 
 const client = new ApiClient()
 const store = createWithMiddleware(client)
-
+const history = syncHistoryWithStore(browserHistory, store)
 window.store = store
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       {routes}
     </Router>
   </Provider>
