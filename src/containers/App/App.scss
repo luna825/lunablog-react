@@ -44,7 +44,7 @@ body {
     width: 100%;
   }
 
-  .navbar-expended {
+  .navbar-user {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -64,11 +64,13 @@ body {
 /* nav的结构 end */
 
 /* nav的样式 start */
-.navbar-skin {
+//展开样式
+.navbar-expended {
   color: #999;
   background-color: $navBgColor;
   .logo {
     font-size: 18px;
+    color: white;
   }
   .navbar-menu {
     .active {
@@ -83,12 +85,57 @@ body {
     }
   }
 
-  .navbar-expended {
+  .navbar-user {
     .navbar-item {
       &:hover {
         color: white;
       }
     }
   }
+}
+
+//收缩样式
+.navbar-shrink {
+  a {
+    @media (max-width: $screen-sm){
+      background-color: $navActiveColor; 
+      text-shadow: 0 1px 0 #b9351f;
+    }
+   }
+  .logo{
+    font-size: 18px;
+    color: white;
+  }
+  .navbar-item{
+    background-color: $navActiveColor
+  }
+  .dropdown-menu {
+    position:fixed;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    @media (max-width: $screen-sm){
+      top: $navbarSize;
+      left: 0;
+    }
+    .active{
+      background-color:#e36e5a;
+    }
+    i {
+      margin-right: 17px;
+    }
+  }
+  .dropdown-menu > li > a {
+    display: block;
+    color: white;
+    line-height: 20px;
+    font-size: 16px;
+    &:hover {
+      background-color: #e36e5a;
+    }
+    padding:13px;
+  }
+
 }
 /* nav的样式 start */
