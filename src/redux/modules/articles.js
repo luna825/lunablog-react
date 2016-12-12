@@ -7,9 +7,14 @@ const LOAD_ARTICLE_LIST_FAIL = 'app/articleList/LOAD_FAIL'
 
 
 export function loadArticleList(){
-  return {
-    types: [LOAD_ARTICLE_LIST, LOAD_ARTICLE_LIST_FAIL, LOAD_ARTICLE_LIST_SUCCESS],
-    promise: (client) => client.get('/api/article/getFrontArticleList')
+  return (getState, dispatch)=>{
+    const options = getState().options.toJS()
+    dispatch({
+      types: [LOAD_ARTICLE_LIST, LOAD_ARTICLE_LIST_SUCCESS, LOAD_ARTICLE_LIST_FAIL],
+      promise: (client) => client.get('/article/getFrontArticleList',{
+        params: options
+      })
+    })
   }
 }
 
@@ -20,6 +25,22 @@ const initialState = fromJS({
 
 export default function reducer(state=initialState, action){
   switch(action.type){
-    
+    case LOAD_ARTICLE_LIST:
+      return state.set('loading', true);
+    case LOAD_ARTICLE_LIST_SUCCESS:
+      return state.merge({
+        loaded: true,
+        loading: false,
+        data: action.result.data
+      })
+    case LOAD_ARTICLE_LIST_FAIL:
+      return state.merge({
+        loaded: false,
+        loading: false,
+        data: null,
+        error: action.error
+      })
+    default:
+      return state;
   }
 }

@@ -17,15 +17,21 @@ export default class DropDown extends Component {
     text: PropTypes.string.isRequired
   };
 
-  handleClick = ()=>{
+  handleClick = (e)=>{
+    e.stopPropagation() //取消事件的冒泡和捕获
     this.setState({
       open: !this.state.open
+    },()=>{
+      if(this.state.open){
+        window.addEventListener('click', this.handleClick)
+      }else{
+        window.removeEventListener('click', this.handleClick)
+      }
     })
   }
 
   render(){
     const {children, dropdownName, classname, text} = this.props;
-    console.log(this.state.open)
     return(
       <div className={"dropdown " + (this.state.open ? 'open' : '') }>
         <a href="javascript:viod(0)" 

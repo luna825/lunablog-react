@@ -1,4 +1,3 @@
-@import '../../theme/varibles.scss';
 
 /* 重置默认样式 start */
 * {
@@ -22,8 +21,6 @@ body {
   background-color: white;
 }
 /* 重置默认样式 end */
-
-
 
 /* nav的结构 start */
 .navbar {
@@ -71,6 +68,9 @@ body {
   .logo {
     font-size: 18px;
     color: white;
+  }
+  span {
+    display: none;
   }
   .navbar-menu {
     .active {

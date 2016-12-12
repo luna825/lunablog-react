@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import {DropDown} from 'components'
 
-import './App.scss'
-
+import { Tooltip } from 'antd';
 
 export default class App extends Component {
   render(){
@@ -14,9 +13,11 @@ export default class App extends Component {
         <nav className="navbar navbar-expended hidden-xs">
           <div className="navbar-menu">
             <Link activeClassName="active" className="navbar-item logo" to="/">简</Link>
-            <Link className="navbar-item" to="#">
-              <i className="fa fa-th" aria-hidden="true"></i>
-            </Link>
+            <Tooltip placement='right' title='专题'>
+              <Link className="navbar-item" to="#">
+                <i className="fa fa-th" aria-hidden="true"></i>
+                <span className='title'>专题</span>
+              </Link></Tooltip>
           </div>
           <div className="navbar-user" >
             <Link to="#" className="navbar-item">
@@ -33,14 +34,12 @@ export default class App extends Component {
               <i className="fa fa-home"></i>
               首页
             </Link></li>
-            <li><Link to="#">
-              <i className="fa fa-th"></i>
-              专题
-            </Link></li>
+            <li>
+              <Link to="#"><i className="fa fa-th"></i>专题</Link>
+            </li>
           </DropDown>
         </nav>
         <div>{this.props.children}</div>
-        <div>Footer</div>
       </div>
     )
   }

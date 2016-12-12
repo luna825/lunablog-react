@@ -2,20 +2,30 @@ var path = require('path')
 var webpack = require('webpack')
 
 var projectRootPath = path.resolve(__dirname, '..')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+let extractCSS = new ExtractTextPlugin('antd.css');
+let extractSCSS = new ExtractTextPlugin('styles.css');
 
 var plugins = [
   new webpack.DefinePlugin({
     'process.env':{
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }
-  })
+  }),
+  extractCSS,
+  extractSCSS
 ]
 
+const antOptions ={
+  "libraryName": "antd",
+  "style": 'css',   // or 'css'
+}
 
 var config = {
   entry:[
     "font-awesome-webpack!./src/theme/font-awesome.config.js", 
-    'bootstrap-loader',
+    'bootstrap-loader/extractStyles',
     path.resolve(projectRootPath, 'src', 'app.js') 
   ],
   output:{
@@ -31,19 +41,25 @@ var config = {
         loader: 'babel-loader',
         query: {
           presets:['react', 'es2015', 'stage-0'],
-          plugins:['transform-decorators-legacy']
+          plugins:['transform-decorators-legacy',['import', antOptions]]
         } 
       },
       {
-        test: /\.css$/,loader:'style-loader!css-loader'
+        test: /\.css$/,loader: extractCSS.extract("style-loader","css-loader")
       },
       {
         test:/\.scss/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+        loader: extractSCSS.extract(['css', 'sass'])
       },
       {
         test:/\.sass/,
         loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+      },
+      {
+        test: /.*\.(gif|png|jpe?g)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=[hash].[ext]'
+        ]
       },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }

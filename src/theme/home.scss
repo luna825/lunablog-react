@@ -1,0 +1,63 @@
+// home 的样式
+// 
+/** 整个主内容 **/
+.main-box {
+  padding: 0 0 0 45px;
+}
+
+/** 左边侧边图片样式 **/
+.sider {
+  position:fixed;
+  top:0;
+  bottom:0;
+  padding:0;
+  .sider-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+  .sider-bottom{
+    position: absolute;
+    bottom:0;
+    color: white;
+    padding: 30px;
+    font-size: 14px;
+    h1, h3 {
+      text-shadow: -1px 0 0 rgba(0,0,0,0.75);
+    }
+    button {
+      &:hover{
+        border-color: #6bd95b;
+        background-color: #6bd95b;
+      }
+    }
+  }
+}
+
+/**右边的内容**/
+.main-content{
+  // tags 列表样式
+  .tags-nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    li {
+      margin: 10px 15px 5px 0;
+      a {
+        padding:5px 10px;
+        border: 1px solid #d9d9d9;
+        border-radius: 14px;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 1.5;
+      }
+      .active {
+        background-color: $navActiveColor;
+        border-color: $navActiveColor;
+        color: white;
+      }
+    }
+  }
+}

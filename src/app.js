@@ -4,11 +4,13 @@ import ReactDOM from 'react-dom'
 import routes from './routes'
 import {Router, browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
+import { ReduxAsyncConnect } from 'redux-async-connect'
 
 import {Provider} from 'react-redux'
 import createWithMiddleware from './redux/create'
 
 import ApiClient from 'utils/ApiClient'
+import './theme/index.scss';
 
 const client = new ApiClient()
 const store = createWithMiddleware(client)
@@ -17,7 +19,7 @@ window.store = store
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router render={(props)=><ReduxAsyncConnect {...props} />} history={history}>
       {routes}
     </Router>
   </Provider>
