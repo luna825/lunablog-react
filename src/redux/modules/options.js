@@ -5,7 +5,7 @@ const CHANGE = 'app/options/CHANGE'
 const initialState = Map({
   currentPage: 1,
   sortName: 'publish_time',
-  itemsPerPage: 10,
+  itemsPerPage: 2,
   tagId: ''
 })
 

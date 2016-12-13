@@ -34,7 +34,7 @@ export default class Tags extends Component {
           <li key={i}>
             <a href="javascript:;"
             className={(options.get('tagId') === tag._id) && 'active' }
-            onClick = {e=>changeSort(e, options.merge({tagId: tag._id, sortName:''}))}
+            onClick = {e=>changeSort(e, options.merge({currentPage:1, tagId: tag._id, sortName:''}))}
             >{tag.name}</a>
           </li>
         )}

@@ -17,7 +17,7 @@ a:hover {text-decoration: none;}
 
 body {
   font: 16px 'Trebuche MS', Verdana, Helvetica, Arial, sans-serif;
-  color:#444;
+  color:#555;
   background-color: white;
 }
 /* 重置默认样式 end */
@@ -32,6 +32,7 @@ body {
   @media (max-width: $screen-sm){
     width: $navbarSize;
     height: $navbarSize;
+    z-index: 1000;
   }
 
   .navbar-menu {

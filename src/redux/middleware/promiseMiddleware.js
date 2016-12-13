@@ -11,7 +11,6 @@ export default function promiseMiddleware( client ){
 
     const actionPromise = promise(client)
     actionPromise.then((result)=>{
-      console.log(result)
       next({type:SUCCESS, result, ...rest })
     }
     ).catch((error)=>{

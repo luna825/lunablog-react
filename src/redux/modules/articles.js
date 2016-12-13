@@ -1,16 +1,18 @@
 import {createReducer} from 'redux-immutablejs'
-import {fromJS} from 'immutable'
+import {fromJS, List} from 'immutable'
 
 const LOAD_ARTICLE_LIST = 'app/articleList/LOAD'
 const LOAD_ARTICLE_LIST_SUCCESS = 'app/articleList/LOAD_SUCCESS'
 const LOAD_ARTICLE_LIST_FAIL = 'app/articleList/LOAD_FAIL'
 
 
-export function loadArticleList(){
+export function loadArticleList(isAdd = false){
   return (getState, dispatch)=>{
     const options = getState().options.toJS()
     dispatch({
       types: [LOAD_ARTICLE_LIST, LOAD_ARTICLE_LIST_SUCCESS, LOAD_ARTICLE_LIST_FAIL],
+      itemsPerPage: options.itemsPerPage,
+      isAdd: isAdd,
       promise: (client) => client.get('/article/getFrontArticleList',{
         params: options
       })
@@ -20,7 +22,9 @@ export function loadArticleList(){
 
 
 const initialState = fromJS({
-  loaded:false
+  loaded:false,
+  isMore:true,
+  data:[]
 })
 
 export default function reducer(state=initialState, action){
@@ -31,7 +35,8 @@ export default function reducer(state=initialState, action){
       return state.merge({
         loaded: true,
         loading: false,
-        data: action.result.data
+        isMore: !(action.result.data.length < action.itemsPerPage),
+        data: action.isAdd ? state.get('data').concat(action.result.data) : action.result.data
       })
     case LOAD_ARTICLE_LIST_FAIL:
       return state.merge({

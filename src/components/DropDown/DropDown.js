@@ -34,7 +34,7 @@ export default class DropDown extends Component {
     const {children, dropdownName, classname, text} = this.props;
     return(
       <div className={"dropdown " + (this.state.open ? 'open' : '') }>
-        <a href="javascript:viod(0)" 
+        <a href="javascript:void(0)" 
           className={"dropdown-toggle " + (classname ? classname : '')}
           id={dropdownName} data-toggle="dropdown"
           onClick={this.handleClick}
