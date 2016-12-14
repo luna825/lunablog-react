@@ -1,0 +1,95 @@
+.article-box{
+  .container {
+    width:700px;
+    @media (max-width: 768px){
+      width: 100%;
+    }
+  }
+  .article {
+    padding: 80px 30px 10px;
+    .article-meta {
+      margin: 20px 0;
+      span {
+        margin-right: 10px;
+        font-size: 12px;
+        color: #999999;
+      }
+    }
+    .article-content {
+      color: #2f2f2f;
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 1.7;
+    }
+  }
+  .meta-like {
+    width: 620px;
+    margin: 0 auto;
+    font-size: 18px;
+    @media (max-width: 768px){
+      width: auto;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size:12px;
+    }
+    .like {
+      width: 9em;
+      height: 3em;
+      border: 1px solid #e78170;
+      border-radius:40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      color: #e36e5a;
+
+      .fenge{
+        border-left: 1px solid #e78170;
+        height: 20px;
+      }
+      &:hover {
+        background-color: #f6cec7;
+        border-color:#f6cec7;
+      }
+    }
+  }
+
+}
+
+//加载动画
+.animate-wrap{
+  position: absolute;
+  .animate-before {
+    position: fixed;
+    color: #fff;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(206, 209, 223, 0.9);
+    z-index: 100;
+    text-align: center;
+    display: flex;
+  }
+  .animate-after {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 54px;
+    height: 75px;
+    margin: -35px 0 0 -27px;
+    pointer-events: none;
+    z-index: 10000;
+    border: 4px solid #fff;
+    transition: opacity 0.3s;
+    animation: loaderAnim 0.8s ease-out infinite alternate forwards;
+  }
+}
+
+@keyframes loaderAnim {
+  to {
+    opacity: 0.3;
+    -webkit-transform: translate3d(0,-100px,0);
+    transform: translate3d(0,-100px,0);
+  }
+}

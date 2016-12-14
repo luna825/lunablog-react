@@ -42,7 +42,7 @@ export default class Home extends Component {
   render(){
     const {tags, options, articles} = this.props;
     return(
-      <div className="container-fluid main-box">
+      <div>
         <Siderbar imgUrl='http://upload.jianshu.io/daily_images/images/ZzGddGzsGxxviDzvWnzH.jpg' />
         <div className="col-sm-7 col-sm-offset-3 main-content">
           <div className="list-container">
