@@ -34,7 +34,7 @@ export default class Articles extends Component {
               </div>
             </div>
             <a href="#" className="media-right wrap-img">
-              <img src="http://upload-images.jianshu.io/upload_images/3078704-afca1e75cf46a544.jpg?imageMogr2/auto-orient/strip%7CimageView2/1/w/300/h/300" alt=""/>
+              <img src="http://localhost:9000/uploads/1476437616598.png" alt=""/>
             </a>
           </li>
         )}
