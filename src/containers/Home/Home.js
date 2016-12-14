@@ -8,7 +8,7 @@ import { Siderbar, Tags, Articles, LoadMoreArticles } from 'components'
 
 import * as tagsActions from 'redux/modules/tags'
 import {loadTagsList, isLoaded as tagsLoad } from 'redux/modules/tags'
-import {loadArticleList} from 'redux/modules/articles'
+import {loadArticleList, isLoaded as articlesLoad } from 'redux/modules/articles'
 import {changeOption} from 'redux/modules/options'
 
 @asyncConnect([{
@@ -17,8 +17,9 @@ import {changeOption} from 'redux/modules/options'
     if (!tagsLoad(getState())){
       promises.push(dispatch(loadTagsList()))
     }
-
-    promises.push(dispatch(loadArticleList()))
+    if (!articlesLoad(getState())){
+      promises.push(dispatch(loadArticleList()))
+    }
 
     return Promise.all(promises);
   }

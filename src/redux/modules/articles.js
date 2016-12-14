@@ -49,3 +49,8 @@ export default function reducer(state=initialState, action){
       return state;
   }
 }
+
+
+export function isLoaded(globState){
+  return !globState.articles.isEmpty() && globState.articles.get('loaded')
+}
