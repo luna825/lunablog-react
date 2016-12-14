@@ -8,6 +8,7 @@ import auth from './auth'
 import tags from './tags'
 import articles from './articles'
 import options from './options'
+import article from './article'
 
 const rootReducer = combineReducers({
   counter,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   tags,
   reduxAsyncConnect,
   articles,
-  options
+  options,
+  article
 })
 
 export default rootReducer

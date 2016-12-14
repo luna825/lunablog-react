@@ -39,7 +39,7 @@ export default class App extends Component {
             </li>
           </DropDown>
         </nav>
-        <div>{this.props.children}</div>
+        <div className="main-box container-fluid">{this.props.children}</div>
       </div>
     )
   }
