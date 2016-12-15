@@ -48,6 +48,12 @@ export default function reducer(state=initialState, action){
         loadingUser:false,
         error: action.error
       })
+    case LOGOUT:
+      return state.merge({
+        isAuthenticated: false,
+        token: null,
+        userInfo: null
+      })
     default:
       return state;
   }
@@ -113,6 +119,12 @@ export function loadUserInfo(email, password){
     })
     .catch(error=> dispatch(LoginFail(error)))
 
+  }
+}
+
+export function logout(){
+  return {
+    type: LOGOUT
   }
 }
 

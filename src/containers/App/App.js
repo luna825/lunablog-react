@@ -3,11 +3,43 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import {DropDown} from 'components'
+import { push } from 'react-router-redux';
 
 import { Tooltip } from 'antd';
 
+import {logout} from 'redux/modules/auth'
+
+@connect(
+  state=>({auth: state.auth}),
+  dispatch=>bindActionCreators({logout, push}, dispatch)
+)
 export default class App extends Component {
+  constructor(props){
+    super(props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const isAuthenticated = this.props.auth.get('isAuthenticated')
+    const nextIsAuthenticated = nextProps.auth.get('isAuthenticated')
+
+    if(!isAuthenticated && nextIsAuthenticated){
+
+    }else if (isAuthenticated && !nextIsAuthenticated){
+      this.props.push('/')
+    }
+  }
+  componentDidMount() {
+
+  }
+
+  handleLogout = (e)=>{
+    e.preventDefault()
+    this.props.logout()
+  }
+
   render(){
+    const {logout, auth} = this.props;
+    const isAuthenticated = auth.get('isAuthenticated')
     return(
       <div>
         <nav className="navbar navbar-expended hidden-xs">
@@ -23,9 +55,14 @@ export default class App extends Component {
             <Link to="#" className="navbar-item">
               <i className="fa fa-font"></i>
             </Link>
-            <Link className="navbar-item" to='#'>
-              <i className="fa fa-sign-in" aria-hidden="true"></i>
-            </Link>
+            {isAuthenticated ? 
+              <Link className="navbar-item" to="/logout" onClick={this.handleLogout}>
+                <i className="fa fa-sign-out"></i>
+              </Link>:
+              <Link activeClassName='hide' className="navbar-item" to='/Login'>
+                <i className="fa fa-sign-in" aria-hidden="true"></i>
+              </Link>
+            }
           </div>
         </nav>
         <nav className="navbar navbar-shrink visible-xs-block">
