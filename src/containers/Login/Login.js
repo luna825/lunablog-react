@@ -11,13 +11,14 @@ import * as authActions from 'redux/modules/auth'
 export default class Login extends Component {
   constructor(props){
     super(props)
+    this.redirectRoute = this.props.location.query.next || '/';
   }
 
   handleSubmit = (e)=>{
     e.preventDefault()
     const email = this.refs.email;
     const password = this.refs.password;
-    this.props.loadUserInfo(email.value, password.value)
+    this.props.loadUserInfo(email.value, password.value, this.redirectRoute )
     email.value = '';
     password.value = '';
 

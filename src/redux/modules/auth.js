@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux'
 import {fromJS} from 'immutable'
 import ApiClient from 'utils/ApiClient'
 
@@ -104,7 +105,7 @@ export function loadUser(token){
   }
 }
 
-export function loadUserInfo(email, password){
+export function loadUserInfo(email, password, redirect='/'){
   return (getState, dispatch)=>{
     dispatch(loginRequest())
     return client.post('/auth/login',{
@@ -116,6 +117,7 @@ export function loadUserInfo(email, password){
     .then(response=>{
       dispatch(loginSuccess(response))
       dispatch(loadUser(response.token))
+      dispatch(push(redirect))
     })
     .catch(error=> dispatch(LoginFail(error)))
 
