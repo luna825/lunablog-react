@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux'
 import {fromJS} from 'immutable'
 import ApiClient from 'utils/ApiClient'
 
@@ -47,6 +48,12 @@ export default function reducer(state=initialState, action){
       return state.merge({
         loadingUser:false,
         error: action.error
+      })
+    case LOGOUT:
+      return state.merge({
+        isAuthenticated: false,
+        token: null,
+        userInfo: null
       })
     default:
       return state;
@@ -98,7 +105,7 @@ export function loadUser(token){
   }
 }
 
-export function loadUserInfo(email, password){
+export function loadUserInfo(email, password, redirect='/'){
   return (getState, dispatch)=>{
     dispatch(loginRequest())
     return client.post('/auth/login',{
@@ -110,9 +117,16 @@ export function loadUserInfo(email, password){
     .then(response=>{
       dispatch(loginSuccess(response))
       dispatch(loadUser(response.token))
+      dispatch(push(redirect))
     })
     .catch(error=> dispatch(LoginFail(error)))
 
+  }
+}
+
+export function logout(){
+  return {
+    type: LOGOUT
   }
 }
 

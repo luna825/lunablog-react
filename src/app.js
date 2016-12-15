@@ -13,7 +13,7 @@ import ApiClient from 'utils/ApiClient'
 import './theme/index.scss';
 
 const client = new ApiClient()
-const store = createWithMiddleware(client)
+const store = createWithMiddleware(browserHistory ,client)
 const history = syncHistoryWithStore(browserHistory, store)
 window.store = store
 

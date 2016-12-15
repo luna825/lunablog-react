@@ -1,5 +1,6 @@
 import {createStore, compose, applyMiddleware} from 'redux'
 
+import {routerMiddleware} from 'react-router-redux'
 import thunk from './middleware/thunk'
 import promiseMiddleware from './middleware/promiseMiddleware'
 
@@ -7,10 +8,10 @@ import rootReducer from './modules/reducers'
 import DevTools from '../containers/DevTools'
 
 
-export default function createStoreWithMiddleware(client,initialState){
+export default function createStoreWithMiddleware(history,client,initialState){
 
   const enhancer = compose(
-    applyMiddleware(thunk, promiseMiddleware(client)),
+    applyMiddleware(thunk, promiseMiddleware(client), routerMiddleware(history)),
     // Required! Enable Redux DevTools with the monitors you chose
     DevTools.instrument()
   );
